@@ -1,0 +1,12 @@
+[submodule "libraries/pico-displayDrivs"]
+	path = libraries/pico-displayDrivs
+	url = https://github.com/tvlad1234/pico-displayDrivs.git
+[submodule "libraries/pico-bmp085Driv"]
+	path = libraries/pico-bmp085Driv
+	url = https://github.com/tvlad1234/pico-bmp085Driv.git
+[submodule "libraries/lvgl"]
+	path = libraries/lvgl
+	url = https://github.com/lvgl/lvgl.git
+[submodule "libraries/freertos/FreeRTOS-Kernel"]
+	path = libraries/freertos/FreeRTOS-Kernel
+	url = https://github.com/FreeRTOS/FreeRTOS-Kernel.git
