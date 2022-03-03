@@ -1,1 +1,69 @@
-
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "J-Link",
+            "type": "cortex-debug",
+            "cwd": "${workspaceRoot}",
+            "executable": "${command:cmake.launchTargetPath}",
+            "request": "launch",
+            "servertype": "jlink",
+            "serverpath": "C:/Program Files/SEGGER/JLink/JLinkGDBServerCL.exe",
+            "device": "RP2040_M0_0",
+            "interface": "swd",
+            "gdbPath": "arm-none-eabi-gdb",
+            "gdbTarget": "your-openocd:3333",
+            "svdFile": "${env:PICO_SDK_PATH}/src/rp2040/hardware_regs/rp2040.svd",
+            "runToMain": true,
+            "postRestartCommands": [
+                "break main",
+                "continue"
+            ]
+        },
+        {
+            "name": "pico-debug",
+            "device": "RP2040",
+            "gdbPath": "arm-none-eabi-gdb",
+            "cwd": "${workspaceRoot}",
+            "executable": "${command:cmake.launchTargetPath}",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/cmsis-dap.cfg",
+                "target/rp2040-core0.cfg",
+            ],
+            "openOCDLaunchCommands": [
+                "transport select swd",
+                "adapter speed 4000"
+                
+            ],
+            "svdFile": "${env:PICO_SDK_PATH}/src/rp2040/hardware_regs/rp2040.svd",
+            "runToMain": true,
+            "postRestartCommands": [
+                "break main",
+                "continue"
+            ]
+        },
+       
+        {
+            "name": "External GDB Server",
+            "type": "cortex-debug",
+            "cwd": "${workspaceRoot}",
+            "executable": "${command:cmake.launchTargetPath}",
+            "request": "launch",
+            "servertype": "external",
+            // This may need to be arm-none-eabi-gdb depending on your system
+            "gdbPath": "arm-none-eabi-gdb",
+            // Connect to an already running OpenOCD instance
+            "gdbTarget": "localhost:3333",
+            "svdFile": "${env:PICO_SDK_PATH}/src/rp2040/hardware_regs/rp2040.svd",
+            "runToMain": true,
+            // Work around for stopping at main on restart
+            "postRestartCommands": [
+                "break main",
+                "continue"
+            ]
+        }
+    ]
+}
